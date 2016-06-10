@@ -170,7 +170,7 @@ class FileUploadControl extends \Nette\Forms\Controls\UploadControl {
 	public function setContainer($container) {
 		$this->container = $container;
 		/** @noinspection PhpParamsInspection */
-		$this->cache = new \Nette\Caching\Cache($this->container->getByType('Nette\Caching\IStorage'));
+		$this->cache = new \Nette\Caching\Cache($this->container->getByType('\Nette\Caching\IStorage'));
 		/** @noinspection PhpParamsInspection */
 		$this->controller->setRequest($container->getByType('\Nette\Http\Request'));
 	}
@@ -272,6 +272,7 @@ class FileUploadControl extends \Nette\Forms\Controls\UploadControl {
 
 	/**
 	 * Vrátí název pro frontu s tokenem.
+	 * @param $token
 	 * @return string
 	 * @internal
 	 */

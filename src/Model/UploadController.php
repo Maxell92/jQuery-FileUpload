@@ -43,7 +43,7 @@ class UploadController extends \Nette\Application\UI\Control {
 	 * @return \Zet\FileUpload\Filter\IMimeTypeFilter
 	 */
 	public function getFilter() {
-		if(is_null($this->filter)) {
+		if(is_null($this->filter) && !is_null($this->uploadControl->getFileFilter())) {
 			$className = $this->uploadControl->getFileFilter();
 			$filterClass = new $className;
 			if($filterClass instanceof \Zet\FileUpload\Filter\IMimeTypeFilter) {
@@ -104,7 +104,7 @@ class UploadController extends \Nette\Application\UI\Control {
 		$cache = $this->uploadControl->getCache();
 
 		try {
-			if(!$this->getFilter()->checkType($file)) {
+			if(!is_null($this->getFilter()) && !$this->getFilter()->checkType($file)) {
 				throw new \Zet\FileUpload\InvalidFileException($this->getFilter()->getAllowedTypes());
 			}
 
